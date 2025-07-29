@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SMS/Email Spam Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #114b85; /* Light blue background */
+            padding: 40px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .spam {
+            color: red;
+        }
+        .not-spam {
+            color: green;
+        }
+        img.result-img {
+            width: 100px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Email/SMS Spam Classifier</h2>
+    <form method="post">
+        <label for="message">Enter your message:</label><br>
+        <textarea name="message" required></textarea><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if result %}
+    <div class="result">
+        {% if result == 'Spam' %}
+            Prediction: <strong class="spam">{{ result }}</strong><br>
+            <img class="result-img" src="{{ url_for('static', filename='spam.png') }}" alt="Spam">
+        {% elif result == 'Not Spam' %}
+            Prediction: <strong class="not-spam">{{ result }}</strong><br>
+            <img class="result-img" src="{{ url_for('static', filename='not_spam.png') }}" alt="Not Spam">
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
